@@ -25,7 +25,7 @@ ExportedObj/
 *.meta
 *.metadata
 *.metadata.*
-*.CurrentLayout
+*.CurrentLayout.dwlt
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
