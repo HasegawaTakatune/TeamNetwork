@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+	//移動速度
+	public float speed;
+
+	//復帰する時間,10~20間で調整
+	public float ReviveTime;
+
 	//移動するクラスを格納する配列
 	Move[] MV=new Move[4];
 

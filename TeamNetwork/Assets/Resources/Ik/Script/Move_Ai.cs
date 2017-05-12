@@ -37,7 +37,12 @@ public class Move_Ai : MonoBehaviour {
 
 	public void Move(){
 		if (GetTime + OpenTime < Time.time) {
-			Target ();
+			if (enemy.GetComponent<Move> ().liveflg == true) {
+				Target ();
+			} else {
+				movetrans.x = 0;
+				movetrans.z = 0;
+			}
 			GetTime = Time.time;
 		}
 		this.transform.position -= new Vector3(movetrans.x/30f,0,movetrans.z/30f);
@@ -62,78 +67,41 @@ public class Move_Ai : MonoBehaviour {
 				dbgcnt = 0;
 				break;
 			}
-		}/*
-		if (this.transform.position.x > enemy.transform.position.x + 1.5f) {
-			movetrans.x = 4;
-		} else if (this.transform.position.x < enemy.transform.position.x - 1.5f) {
-			movetrans.x = -4;
-		} else {
-			movetrans.x = 0;
+		
+//		Dodge ();
 		}
-		if (this.transform.position.z > enemy.transform.position.z + 1.5f) {
-			movetrans.z = 4;
-		} else if (this.transform.position.z < enemy.transform.position.z - 1.5f) {
-			movetrans.z = -4;
-		} else {
-			movetrans.z = 0;
-		}
-		if (movetrans.x == 4 && movetrans.z == 4)vectr = 0;
-		if(movetrans.x==4&&movetrans.z==0)vectr = 1;
-		if(movetrans.x==4&&movetrans.z==-4)vectr = 2;
-		if(movetrans.x==0&&movetrans.z==4)vectr = 3;
-		if(movetrans.x==0&&movetrans.z==0)vectr = 4;
-		if(movetrans.x==0&&movetrans.z==-4)vectr = 5;
-		if(movetrans.x==-4&&movetrans.z==4)vectr = 6;
-		if(movetrans.x==-4&&movetrans.z==0)vectr = 7;
-		if(movetrans.x==-4&&movetrans.z==-4)vectr = 8;*/
-		Dodge ();
 	}
 
 	//避ける関数
-	void Dodge(){
+	void Dodge ()
+	{
 		int Dodgeflg;
 		//避けるかどうかを判定
 //		Dodgeflg=Random.Range (0,1);
-		Dodgeflg=0;
+		Dodgeflg = 0;
 		if (Dodgeflg == 0) {
 			//避ける
 			//相手の進んでいる方向を検出
 			//自分の先が未知数なら
-			Debug.Log(this.transform.position.x+"_"+movetrans.x);
-			if(this.transform.position.x+movetrans.x<floor_min.x){
+			Debug.Log (this.transform.position.x + "_" + movetrans.x);
+			if (this.transform.position.x + movetrans.x < floor_min.x) {
 				movetrans.x = 0f;
 			}
-			if(this.transform.position.z+movetrans.z<floor_min.y){
+			if (this.transform.position.z + movetrans.z < floor_min.y) {
 				movetrans.z = 0f;
 			}
-			if(this.transform.position.x+movetrans.x>floor_max.x){
+			if (this.transform.position.x + movetrans.x > floor_max.x) {
 				movetrans.x = 0f;
 			}
-			if(this.transform.position.z+movetrans.z>floor_max.y){
+			if (this.transform.position.z + movetrans.z > floor_max.y) {
 				movetrans.z = 0f;
 			}
 			/**自分の方に向かってきているかが検出できない**/
 			//自分の避ける方向を判定
-			Debug.Log(floor_min+"_"+floor_max);
+			Debug.Log (floor_min + "_" + floor_max);
 						
 		} else {//避けない
 		}			
 
 	}
-/*	void OnCollisionStay(Collision col){
-		if (col.gameObject.name == "floor") {
-			if (this.transform.position.x < floor_min.x) {
-				floor_min.x = this.transform.position.x;
-			}
-			if (this.transform.position.z < floor_min.y) {
-				floor_min.y = this.transform.position.z;
-			}
-			if (this.transform.position.x > floor_max.x) {
-				floor_max.x = this.transform.position.x;
-			}
-			if (this.transform.position.z > floor_max.y) {
-				floor_max.y = this.transform.position.z;
-			}
-		}
-	}
-*/}
+}

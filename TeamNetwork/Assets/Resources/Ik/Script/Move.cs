@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour {
 
-	public float speed;//移動速度
+	float speed;//移動速度
 	public string left;
 	public string right;
 	public string up;
@@ -13,10 +13,22 @@ public class Move : MonoBehaviour {
 	Move_Ai Ai;
 	bool AiFlg;
 
-	[SerializeField]
+	//ステージ上にいるかを保持する変数
+	public bool liveflg;
+
 	float ReviveTime;//復帰する時間,10~20間で調整
 
+	GameController GC;
+
+	bool Moveflg;
+
+	float FloorPosY;
+
 	void Start(){
+		GC = GameObject.Find ("GameController").GetComponent<GameController> ();
+		speed = GC.speed;
+		ReviveTime = GC.ReviveTime;
+
 		Ai=this.GetComponent<Move_Ai> ();
 
 		//Aiかを判断する関数
@@ -26,7 +38,35 @@ public class Move : MonoBehaviour {
 	void Update () {
 		//復帰する
 		Revive ();
+		if (FloorPosY-0.01 <= this.transform.position.y) {
+			MoveOn ();
+		}
 
+	}
+
+	/// <summary>
+	/// PlayerモードとAiモードかを振り分ける関数
+	/// </summary>
+	void AiSerch(){
+		//スクリプトが無いか、非アクティブならPlayerモードへ
+		if (Ai==null||Ai.enabled==false) {
+			AiFlg = false;
+			//そうでないならAiモードへ
+		} else {
+			AiFlg = true;
+		}
+	}
+
+	/// <summary>
+	/// 復帰する関数
+	/// </summary>
+	void Revive(){
+		if (this.transform.position.y < -ReviveTime) {
+			this.transform.position = new Vector3 (0f, 2f, 0f);
+		}
+	}
+
+	void MoveOn(){
 		if (AiFlg == true) {
 			Ai.Move ();
 		} else {
@@ -49,25 +89,17 @@ public class Move : MonoBehaviour {
 		}
 	}
 
-	/// <summary>
-	/// PlayerモードとAiモードかを振り分ける関数
-	/// </summary>
-	void AiSerch(){
-		//スクリプトが無いか、非アクティブならPlayerモードへ
-		if (Ai==null||Ai.enabled==false) {
-			AiFlg = false;
-			//そうでないならAiモードへ
-		} else {
-			AiFlg = true;
+	void OnCollisionEnter(Collision col){
+		//床に触れた時
+		if (col.gameObject.name=="floor") {
+			FloorPosY=this.transform.position.y;
+			liveflg = true;
 		}
 	}
-
-	/// <summary>
-	/// 復帰する関数
-	/// </summary>
-	void Revive(){
-		if (this.transform.position.y < -ReviveTime) {
-			this.transform.position = new Vector3 (0f, 1f, 0f);
+	void OnCollisionExit(Collision col){
+		//床から離れた時
+		if (col.gameObject.name == "floor") {
+			liveflg = false;
 		}
 	}
 }
