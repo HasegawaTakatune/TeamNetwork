@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scene/Main.unity
+- path: Assets/Resources/Shihara/Scene/test.unity
   isLoaded: 1
   isActive: 1
