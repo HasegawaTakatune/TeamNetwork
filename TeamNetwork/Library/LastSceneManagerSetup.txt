@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/Ik/Scene/Move+Action.unity
+=======
+- path: Assets/Resources/Shihara/Scene/test.unity
+>>>>>>> origin/shihara
   isLoaded: 1
   isActive: 1

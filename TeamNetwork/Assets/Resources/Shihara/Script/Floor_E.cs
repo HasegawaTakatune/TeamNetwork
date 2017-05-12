@@ -5,6 +5,7 @@ using UnityEngine;
 public class Floor_E : MonoBehaviour {
     public float move_y;
     float count;
+
     // Use this for initialization
     void Start () {
 		
@@ -14,9 +15,8 @@ public class Floor_E : MonoBehaviour {
 	void Update () {
         count += Manager.GameCount;
         transform.Translate(0.0f, move_y, 0.0f);
-
-        if (count > 2)
-        {
+       if (count > 2)
+        {   
             move_y = move_y * -1;
             count = 0;
         }
