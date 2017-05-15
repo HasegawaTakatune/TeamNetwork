@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class Manager : MonoBehaviour {
+    public static float GameCount;
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +12,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        GameCount = Time.deltaTime;
+        //Debug.Log(GameCount);
 	}
 }

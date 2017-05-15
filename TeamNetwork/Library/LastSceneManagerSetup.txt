@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scene/Main.unity
+- path: Assets/Resources/Kai/Scene/Stage.unity
   isLoaded: 1
   isActive: 1
