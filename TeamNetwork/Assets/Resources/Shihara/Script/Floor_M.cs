@@ -23,7 +23,7 @@ public class Floor_M : MonoBehaviour {
         }
     }
 
-    //床から降りたら
+    //床から降りたら(今のところ必要ないみたいです)
    /* void OnCollisionExit(Collision other)
     {
         var body = other.gameObject.GetComponent<Rigidbody>();

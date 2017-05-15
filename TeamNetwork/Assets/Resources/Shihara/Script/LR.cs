@@ -13,7 +13,10 @@ public class LR : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        count += Manager.GameCount;
+        //GameManagerなどを作る場合は使ってください
+        //count += Manager.GameCount;
+
+        count += Time.deltaTime;
         transform.Translate(move_x, 0.0f, 0.0f);
 
         if (count > 2)
